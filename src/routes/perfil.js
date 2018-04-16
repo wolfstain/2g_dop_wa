@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import Informacion from './perfil/informacion'
 import EditarInformacion from './perfil/editarInformacion'
 
-import {graphql} from 'react-apollo';
+import {graphql,compose} from 'react-apollo';
 import gpl from 'graphql-tag';
 import gql from 'graphql-tag';
 
@@ -51,16 +51,22 @@ class Perfil extends Component{
   render() {
     const {showInformacion,showEditarInformacion} = this.state;
 
-    let { data } = this.props
-    if (data.loading) {
+    let {data} = this.props
+
+    if (this.props.queryInformacion.loading || this.props.queryGustos.loading) {
       return <div>Loading...</div>
     }
+
+
+    const infoUsuario=this.props.queryInformacion.userById
+    const gustosUsuario=this.props.queryGustos.pleasureByUser
+
     return(
+
       <div id="contenido-principal">
         <div class="ui vertical inverted left visible sidebar menu">
-
         <div class="div-image-profile-menu">
-          <Image src={data.userById.picture} size='small' verticalAlign='middle' circular  centered/>
+          <Image src={infoUsuario.picture} size='small' verticalAlign='middle' circular  centered/>
         </div>
           <a class="item" href="/inicio">
             <i class="home icon"></i>
@@ -95,13 +101,13 @@ class Perfil extends Component{
       <div class="pusher">
         <Grid columns={2} centered verticalAlign='middle' style={styles.gridContent}>
             <Grid.Column width={6} style={styles.columnPerfil}>
-              <Image src='images/perfil.jpg' size='medium' circular centered/>
+              <Image src={infoUsuario.picture} size='medium' circular centered/>
               <Button inverted color='grey'>Cambiar Foto!</Button>
             </Grid.Column>
 
             <Grid.Column width={6} style={styles.columnInformation}>
               <h1>Usuario</h1>
-              {showInformacion && <Informacion styles={styles} handleClick={this.showEditarInformacion} datos={data.userById}/>}
+              {showInformacion && <Informacion styles={styles} handleClick={this.showEditarInformacion} datosUsuario={infoUsuario} gustosUsuario={gustosUsuario}/>}
               {showEditarInformacion && <EditarInformacion styles={styles} handleClick={this.showInformacion}/>}
             </Grid.Column>
         </Grid>
@@ -112,7 +118,7 @@ class Perfil extends Component{
 }
 
 
-const query = gql`
+const queryInformacion = gql`
 query DetailView($id: Int!){
   userById(id: $id) {
     id,
@@ -125,6 +131,17 @@ query DetailView($id: Int!){
 }`
 ;
 
+const queryGustos = gql`
+query PleasureUser($id: Int!){
+  pleasureByUser(user_id: $id){
+   name
+   description
+   user_id
+   subcategory_id
+ }
+}`
+;
+
 const queryOptions = {
   options: props => ({
     variables: {
@@ -134,4 +151,9 @@ const queryOptions = {
 }
 
 
-export default graphql(query, queryOptions)(Perfil);
+/*export default graphql(query, queryOptions)(Perfil);*/
+
+export default compose(
+  graphql(queryInformacion, {name: 'queryInformacion',options: props => ({ variables: { id: 1 }}) }),
+  graphql(queryGustos, {name: 'queryGustos', options: props => ({ variables: { id: 1 }}) }),
+)(Perfil);

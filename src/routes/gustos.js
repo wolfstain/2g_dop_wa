@@ -3,7 +3,8 @@ import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Mo
 import Slider from "react-slick";
 import ModalEditarGusto from './gustos/modalEditarGusto'
 import ModalNuevoGusto from './gustos/modalNuevoGusto'
-
+import gql from "graphql-tag";
+import { Query,graphql } from "react-apollo";
 
 const styles={
   gridContent:{
@@ -123,6 +124,5 @@ class Gustos extends Component{
     )
   }
 }
-
 
 export default Gustos;

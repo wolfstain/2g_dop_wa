@@ -37,3 +37,10 @@ body,#root{
 .visible.transition {
     display: grid !important;
 }
+
+.medium{
+  height: 300px !important;
+}
+.small{
+  height: 150px !important;
+}
