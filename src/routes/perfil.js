@@ -1,9 +1,13 @@
 import React,{ Component } from 'react';
 import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar} from 'semantic-ui-react';
 import Slider from "react-slick";
-
 import Informacion from './perfil/informacion'
 import EditarInformacion from './perfil/editarInformacion'
+
+import {graphql} from 'react-apollo';
+import gpl from 'graphql-tag';
+import gql from 'graphql-tag';
+
 
 const styles={
   gridContent:{
@@ -29,15 +33,11 @@ const styles={
   }
 }
 
-class Inicio extends Component{
-
-
+class Perfil extends Component{
   state={
     showInformacion:true,
     showEditarInformacion:false,
   }
-
-
   showEditarInformacion= (ev)=>{
       ev.preventDefault()
       this.setState({showInformacion:false,showEditarInformacion:true})
@@ -48,15 +48,19 @@ class Inicio extends Component{
       this.setState({showInformacion:true,showEditarInformacion:false})
   }
 
-
   render() {
     const {showInformacion,showEditarInformacion} = this.state;
 
+    let { data } = this.props
+    if (data.loading) {
+      return <div>Loading...</div>
+    }
     return(
       <div id="contenido-principal">
         <div class="ui vertical inverted left visible sidebar menu">
+
         <div class="div-image-profile-menu">
-          <Image src='images/perfil.jpg' size='small' verticalAlign='middle' circular  centered/>
+          <Image src={data.userById.picture} size='small' verticalAlign='middle' circular  centered/>
         </div>
           <a class="item" href="/inicio">
             <i class="home icon"></i>
@@ -96,8 +100,9 @@ class Inicio extends Component{
             </Grid.Column>
 
             <Grid.Column width={6} style={styles.columnInformation}>
-              {showInformacion && <Informacion styles={styles} handleClick={this.showEditarInformacion} />}
-              {showEditarInformacion && <EditarInformacion styles={styles} handleClick={this.showInformacion} />}
+              <h1>Usuario</h1>
+              {showInformacion && <Informacion styles={styles} handleClick={this.showEditarInformacion} datos={data.userById}/>}
+              {showEditarInformacion && <EditarInformacion styles={styles} handleClick={this.showInformacion}/>}
             </Grid.Column>
         </Grid>
       </div>
@@ -106,4 +111,27 @@ class Inicio extends Component{
   }
 }
 
-export default Inicio;
+
+const query = gql`
+query DetailView($id: Int!){
+  userById(id: $id) {
+    id,
+    name
+    picture
+    age
+    email
+    gender
+  }
+}`
+;
+
+const queryOptions = {
+  options: props => ({
+    variables: {
+      id: 1,
+    },
+  }),
+}
+
+
+export default graphql(query, queryOptions)(Perfil);
