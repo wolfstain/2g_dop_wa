@@ -1,10 +1,11 @@
 import React,{ Component } from 'react';
-import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal} from 'semantic-ui-react';
+import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal,Table} from 'semantic-ui-react';
 import Slider from "react-slick";
 import ModalEditarGusto from './gustos/modalEditarGusto'
 import ModalNuevoGusto from './gustos/modalNuevoGusto'
+import MyMenu from './menu'
 import gql from "graphql-tag";
-import { Query,graphql } from "react-apollo";
+import { Query,graphql,compose } from "react-apollo";
 
 const styles={
   gridContent:{
@@ -33,42 +34,31 @@ const styles={
 class Gustos extends Component{
 
   render() {
-    return(
-      <div id="contenido-principal">
-        <div class="ui vertical inverted left visible sidebar menu">
-        <div class="div-image-profile-menu">
-          <Image src='images/perfil.jpg' size='small' verticalAlign='middle' circular  centered/>
-        </div>
-          <a class="item" href="/inicio">
-            <i class="home icon"></i>
-                Inicio
-          </a>
-          <a class="item" href="/perfil">
-          <i class="settings icon"></i>
-          Perfil
-          </a>
-          <a class="item" href="/amigos">
-            <i class="users icon"></i>
-            Amigos
-          </a>
-          <a class="item" href="/citas">
-            <i class="hand victory icon"></i>
-            Citas
-          </a>
 
-          <a class="item" href="/gustos">
-            <i class="smile icon"></i>
-            Gustos
-          </a>
-          <a class="item">
-          <i class="chat icon"></i>
-          Mensajes (Proximamente)
-          </a>
-          <a class="item" href="/match">
-          <i class="like icon"></i>
-          Encuentra personas!
-          </a>
-      </div>
+    if (this.props.queryCategorias.loading || this.props.queryGustos.loading|| this.props.querySubcategorias.loading) {
+      return <div>Loading...</div>
+    }
+    const subcategorias=this.props.querySubcategorias.allSubcategories
+    const categorias=this.props.queryCategorias.allCategories
+    const gustos=this.props.queryGustos.pleasureByUser
+
+    const dictSubcategorias={}
+    const dictCategorias={}
+
+
+
+    console.log(gustos)
+    return(
+
+      subcategorias.map(function(subcategoria){
+          dictSubcategorias[subcategoria.id]=[subcategoria.name,subcategoria.category_id]
+      }),
+      categorias.map(function(categoria){
+          dictCategorias[categoria.id]=categoria.name
+      }),
+
+      <div id="contenido-principal">
+      <MyMenu />
       <div class="pusher">
         <Grid columns={2} centered verticalAlign='middle' style={styles.gridContent}>
             <Grid.Column width={6} style={styles.columnInformation}>
@@ -80,40 +70,35 @@ class Gustos extends Component{
                         Cosas que te gustan!
                        </Header.Subheader>
                     </Header>
-                    <List divided verticalAlign='middle'>
-                      <List.Item>
-                        <List.Content floated='right'>
-                          <Button circular color='violet' icon='remove' />
-                          <ModalEditarGusto value={1}/>
-                        </List.Content>
-                        <Icon name='like' />
-                        <List.Content>
-                          Musica
-                        </List.Content>
-                      </List.Item>
+                    <Table color={'blue'} key={'blue'}>
+                      <Table.Header>
+                        <Table.Row>
+                          <Table.HeaderCell>Gusto</Table.HeaderCell>
+                          <Table.HeaderCell>SubCategoria</Table.HeaderCell>
+                            <Table.HeaderCell>Categoria</Table.HeaderCell>
+                          <Table.HeaderCell>Acciones</Table.HeaderCell>
+                        </Table.Row>
+                      </Table.Header>
 
-                      <List.Item>
-                        <List.Content floated='right'>
-                          <Button circular color='violet' icon='remove' />
-                          <ModalEditarGusto value={1}/>
-                        </List.Content>
-                        <Icon name='like' />
-                        <List.Content>
-                          Musica
-                        </List.Content>
-                      </List.Item>
+                      <Table.Body>
 
-                      <List.Item>
-                        <List.Content floated='right'>
-                          <Button circular color='violet' icon='remove' />
-                          <ModalEditarGusto value={1}/>
-                        </List.Content>
-                        <Icon name='like' />
-                        <List.Content>
-                          Musica
-                        </List.Content>
-                      </List.Item>
-                    </List>
+                        {gustos.map(function(gusto){
+                          return (
+                            <Table.Row>
+                              <Table.Cell><Icon name='like' /> {gusto.name}</Table.Cell>
+                              <Table.Cell>{dictSubcategorias[gusto.subcategory_id][0]}</Table.Cell>
+                              <Table.Cell>{dictCategorias[dictSubcategorias[gusto.subcategory_id][1]]}</Table.Cell>
+                              <Table.Cell>
+                                <Button circular color='violet' icon='remove' />
+                                <ModalEditarGusto value={1}/>
+                              </Table.Cell>
+
+                            </Table.Row>
+                          )
+                        })}
+                      </Table.Body>
+                    </Table>
+
                     <ModalNuevoGusto/>
 
                   </div>
@@ -125,4 +110,45 @@ class Gustos extends Component{
   }
 }
 
-export default Gustos;
+
+const queryGustos = gql`
+query PleasureUser($id: Int!){
+  pleasureByUser(user_id: $id){
+   name
+   description
+   user_id
+   subcategory_id
+ }
+}`
+;
+
+const querySubcategorias = gql`
+query{
+	allSubcategories{
+  id
+  name
+  description
+  category_id
+  }
+}`
+;
+
+const queryCategorias = gql`
+query{
+	allCategories{
+  id
+  name
+  description
+  created_at
+  updated_at
+  }
+}`
+;
+
+
+
+export default compose(
+  graphql(queryGustos, {name: 'queryGustos', options: props => ({ variables: { id: 1 }}) }),
+  graphql(queryCategorias, {name: 'queryCategorias'}),
+  graphql(querySubcategorias, {name: 'querySubcategorias'}),
+)(Gustos);

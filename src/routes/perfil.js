@@ -61,6 +61,8 @@ class Perfil extends Component{
     const infoUsuario=this.props.queryInformacion.userById
     const gustosUsuario=this.props.queryGustos.pleasureByUser
 
+    
+
     return(
 
       <div id="contenido-principal">

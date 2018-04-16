@@ -70,7 +70,4 @@ querySubcategoriesByCategrory($id=Int!){
 const CategoriaSelect = graphql(queryCategories)(categorias);
 
 
-
-const CategoriaSelect = graphql(queryCategories)(categorias);
-
 export default ModalNuevoGusto
