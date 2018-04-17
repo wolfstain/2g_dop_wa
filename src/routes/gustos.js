@@ -67,7 +67,7 @@ class Gustos extends Component{
       <MyMenu />
       <div class="pusher">
         <Grid columns={2} centered verticalAlign='middle' style={styles.gridContent}>
-            <Grid.Column width={6} style={styles.columnInformation}>
+            <Grid.Column width={10} style={styles.columnInformation}>
               <div>
                   <Header as='h1' icon textAlign='center'>
                        <Icon name='smile' />

@@ -48,3 +48,14 @@ body,#root{
 .small{
   height: 150px !important;
 }
+
+.ui.table{
+  background: #00000014 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-size: 1.3em;
+}
+
+.ui.table thead th{
+  background: #00000014 !important;
+  color: #7ecaec !important;
+}
