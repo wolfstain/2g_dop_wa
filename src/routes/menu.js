@@ -21,10 +21,16 @@ class MyMenu extends Component{
 
     return(
       <div class="ui vertical inverted left visible sidebar menu">
+
+        <div class="div-image-logo-menu">
+          <Image src="images/dop-logo2.png" verticalAlign='middle' centered/>
+        </div>
+
+
         <div class="div-image-profile-menu">
           <Image src={infoUsuario.picture} size='small' verticalAlign='middle' circular  centered/>
         </div>
-          <a class="item" href="/inicio">
+          <a class="item" href="/">
             <i class="home icon"></i>
                 Inicio
           </a>

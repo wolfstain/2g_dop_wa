@@ -28,6 +28,10 @@ body,#root{
   margin-bottom: 30px;
 }
 
+.div-image-logo-menu{
+  padding: 15px;
+}
+
 
 .div-buttonsInfo{
   text-align: right;

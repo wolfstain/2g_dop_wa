@@ -46,7 +46,7 @@ class Login extends Component{
 
           <Grid.Column width={4}>
             <div style={styles.divLogin}>
-              <img src="images/dop-logo.png" />
+              <img src="images/dop-logo2.png" />
             </div>
             <div style={styles.divLogin}>
               <Form>
