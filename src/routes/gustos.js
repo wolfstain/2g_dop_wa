@@ -33,11 +33,20 @@ const styles={
 
 class Gustos extends Component{
 
+  handleCrearGusto=async (ev,args)=>{
+    console.log(args)
+    const response = await this.props.mutate({
+      variables: args
+    })
+    console.log(response)
+  }
+
   render() {
 
     if (this.props.queryCategorias.loading || this.props.queryGustos.loading|| this.props.querySubcategorias.loading) {
       return <div>Loading...</div>
     }
+
     const subcategorias=this.props.querySubcategorias.allSubcategories
     const categorias=this.props.queryCategorias.allCategories
     const gustos=this.props.queryGustos.pleasureByUser
@@ -45,9 +54,6 @@ class Gustos extends Component{
     const dictSubcategorias={}
     const dictCategorias={}
 
-
-
-    console.log(gustos)
     return(
 
       subcategorias.map(function(subcategoria){
@@ -92,14 +98,13 @@ class Gustos extends Component{
                                 <Button circular color='violet' icon='remove' />
                                 <ModalEditarGusto value={1}/>
                               </Table.Cell>
-
                             </Table.Row>
                           )
                         })}
                       </Table.Body>
                     </Table>
 
-                    <ModalNuevoGusto/>
+                    <ModalNuevoGusto  handleSubmit={this.handleCrearGusto} dictCategorias={dictCategorias} dictSubcategorias={dictSubcategorias}/>
 
                   </div>
             </Grid.Column>
@@ -146,9 +151,21 @@ query{
 ;
 
 
-
+const mutationCrearGusto=gql`
+mutation ($name: String!, $description: String!, $user_id: Int! , $subcategory_id:Int!){
+  createPleasure(pleasure:{
+    name:$name,
+    description:$description,
+    user_id:$user_id,
+    subcategory_id:$subcategory_id
+  }){
+    name
+  }
+}`
+;
 export default compose(
   graphql(queryGustos, {name: 'queryGustos', options: props => ({ variables: { id: 1 }}) }),
   graphql(queryCategorias, {name: 'queryCategorias'}),
   graphql(querySubcategorias, {name: 'querySubcategorias'}),
+  graphql(mutationCrearGusto),
 )(Gustos);
