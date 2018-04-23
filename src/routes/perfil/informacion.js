@@ -27,7 +27,8 @@ export default({styles, handleClick, datosUsuario , gustosUsuario})=>{
               <List.Item>Numero: {datosUsuario.age}</List.Item>
             </List>
             <div class="div-buttonsInfo">
-               <a href="/gustos"><Button onClick={handleClick} circular color='blue' icon='write' /></a>
+               <a href={`/perfil/editarInformacion/${datosUsuario.id}`}><Button onClick={handleClick} circular color='blue' icon='write' />
+               </a>
              </div>
           </div>
           <div class="subdiv-information">

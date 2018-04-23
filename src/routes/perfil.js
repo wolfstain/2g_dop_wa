@@ -78,7 +78,7 @@ class Perfil extends Component{
             <Grid.Column width={6} style={styles.columnInformation}>
               <h1>Usuario</h1>
               {showInformacion && <Informacion styles={styles} handleClick={this.showEditarInformacion} datosUsuario={infoUsuario} gustosUsuario={gustosUsuario}/>}
-              {showEditarInformacion && <EditarInformacion styles={styles} handleClick={this.showInformacion}/>}
+              {showEditarInformacion && <EditarInformacion styles={styles} handleClick={this.showInformacion} datosUsuario={infoUsuario} />}
             </Grid.Column>
         </Grid>
       </div>
@@ -111,6 +111,23 @@ query PleasureUser($id: Int!){
  }
 }`
 ;
+
+const updateuser = gql`
+mutation updateUser($id: Int!,$name: String!, $gender: String!, $email: String!, $age: String!, $picture: String!){
+  updateUser(id: $id,user:{
+    name: $name,
+    gender: $gender,
+    email: $email,
+    age: $age,
+    picture: $picture,
+  })
+  {
+    name
+    gender
+  }
+}`
+;
+
 
 const queryOptions = {
   options: props => ({
