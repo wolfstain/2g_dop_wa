@@ -32,22 +32,22 @@ const categorias = ({ data: {loading, error, allCategories},handleSubmit,dictCat
 
       const args={'user_id':1}
 
-      const handleChange=(ev,input)=>{        
+      const handleChange=(ev,input)=>{
         args[input.name]=input.value
         console.log(input.options)
         if (input.name=='category_id'){
           optionsSubcategoria.length = 0;
           window.alert('categoria vacia' + optionsSubcategoria);
-          Object.entries(dictSubcategorias).map(function([key,value]){            
+          Object.entries(dictSubcategorias).map(function([key,value]){
               if(args['category_id'] == value[1]){
-                optionsSubcategoria.push({'key':key,'value':key, 'text':value[0]});                
+                optionsSubcategoria.push({'key':key,'value':key, 'text':value[0]});
               }
           })
-          
+
           window.alert(optionsSubcategoria);
 
-          console.log(optionsSubcategoria);                
-          
+          console.log(optionsSubcategoria);
+
         }
       }
 

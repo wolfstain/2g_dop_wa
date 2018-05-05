@@ -3,6 +3,7 @@ import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Mo
 import Slider from "react-slick";
 import ModalEditarGusto from './gustos/modalEditarGusto'
 import ModalNuevoGusto from './gustos/modalNuevoGusto'
+import ModalNuevoGustoII from './gustos/modalNuevoGustoII.js'
 import MyMenu from './menu'
 import gql from "graphql-tag";
 import { Query,graphql,compose } from "react-apollo";
@@ -105,6 +106,8 @@ class Gustos extends Component{
                     </Table>
 
                     <ModalNuevoGusto  handleSubmit={this.handleCrearGusto} dictCategorias={dictCategorias} dictSubcategorias={dictSubcategorias}/>
+
+                  <ModalNuevoGustoII />
 
                   </div>
             </Grid.Column>
