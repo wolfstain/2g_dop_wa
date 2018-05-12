@@ -64,7 +64,7 @@ class editarInformacion extends React.Component{
           <input className="mb2" type = "text" value={this.state.name} placeholder='Name' onChange={e => this.setState({name: e.target.value})}/>
           <input className="mb2" type = "text" value={this.state.gender} placeholder='Gender' onChange={e => this.setState({gender: e.target.value})}/>
           <input className="mb2" type = "text" value={this.state.email} placeholder='email' onChange={e => this.setState({email: e.target.value})}/>
-          ><input className="mb2" type = "text" value={this.state.age} placeholder='Age' onChange={e => this.setState({age: e.target.value})}/>
+          <input className="mb2" type = "text" value={this.state.age} placeholder='Age' onChange={e => this.setState({age: e.target.value})}/>
           <input className="mb2" type = "text" value={this.state.picture} placeholder='Age' onChange={e => this.setState({picture: e.target.value})}/>
           </List>
           <div className='flex justify-between'>

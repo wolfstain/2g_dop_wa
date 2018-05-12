@@ -1,8 +1,9 @@
-import React from 'react'
+import React ,{Component} from 'react'
+import { Button, Header, Icon, Modal , Form,Accordion , Label,Popup} from 'semantic-ui-react'
+import $ from 'jquery'
 import { Mutation,Query } from 'react-apollo'
 import { withState } from 'recompose'
 import { GET_PLEASURES, ADD_PLEASURE, ALL_CATEGORIES, SUBCATEGORIES_BY_CATEGORY ,ALL_SUBCATEGORIES} from '../../queries.js'
-import { Button, Header, Icon, Modal , Form} from 'semantic-ui-react'
 
 
 const updateCache = (cache, { data: { createPleasure } }) => {
@@ -17,15 +18,39 @@ const updateCache = (cache, { data: { createPleasure } }) => {
 }
 
 
+export default class AccordionForm extends Component {
+  state = { activeIndex: 1 }
 
-export default(() => {
-  return (
-    <Categories />
-  );
-});
+  handleClick = (e, titleProps) => {
+    const { index } = titleProps
+    const { activeIndex } = this.state
+    const newIndex = activeIndex === index ? -1 : index
+    this.setState({ activeIndex: newIndex })
+  }
+
+  render(){
+    const { activeIndex } = this.state
+
+    return(
+      <Accordion fluid>
+          <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
+          <Popup
+            trigger={<Button circular color='green' icon='plus'/>}
+            content='Agrega tus gustos!'
+          />
+          </Accordion.Title>
+          <Accordion.Content active={activeIndex === 0}>
+            <Categories />
+          </Accordion.Content>
+      </Accordion>
+    )
+  }
+}
 
 
-const Categories = ({ onCategorySelected }) => {
+
+
+const Categories = () => {
   let optionsCategoria=[]
   let optionsSubcategoria=[]
   let dictSubcategorias={}
@@ -35,7 +60,6 @@ const Categories = ({ onCategorySelected }) => {
   function resetForm() {
     document.getElementById("form").reset();
   }
-
   const handleChange=(ev,input)=>{
     args[input.name]=input.value
     if (input.name=='category_id'){
@@ -47,6 +71,7 @@ const Categories = ({ onCategorySelected }) => {
       })
     }
   }
+
   return(
     <div>
         <Query query={ALL_CATEGORIES}>
@@ -89,9 +114,8 @@ const Categories = ({ onCategorySelected }) => {
                         <Form.Select onChange={handleChange} fluid label='Categoria' name='category_id' options={optionsCategoria} placeholder='Categoria' />
                         <Form.Select onChange={handleChange} fluid label='SubCategoria' name='subcategory_id' options={optionsSubcategoria} placeholder='SubCategoria' />
                       </Form.Group>
-                      <Button type='submit'>Submit</Button>
+                      <Button type='submit'>Crear</Button>
                     </Form>
-
                 )}
               </Mutation>
             );

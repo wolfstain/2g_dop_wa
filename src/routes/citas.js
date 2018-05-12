@@ -2,8 +2,6 @@
 import React ,{Component}from 'react';
 import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal} from 'semantic-ui-react';
 import Slider from "react-slick";
-import ModalNuevoGustoII from './gustos/modalNuevoGustoII.js'
-import Querygustos from './gustos/querygustos.js'
 import MyMenu from './menu'
 
 const styles={
@@ -31,16 +29,16 @@ const styles={
 }
 
 class Home extends Component{
-
   render() {
     return(
+
       <div id="contenido-principal">
+
         <MyMenu />
       <div class="pusher">
         <Grid columns={2} centered verticalAlign='middle' style={styles.gridContent}>
             <Grid.Column width={6} style={styles.columnInformation}>
-              <ModalNuevoGustoII />
-              <Querygustos />
+
             </Grid.Column>
         </Grid>
       </div>

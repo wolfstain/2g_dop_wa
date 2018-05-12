@@ -47,7 +47,6 @@ const categorias = ({ data: {loading, error, allCategories},handleSubmit,dictCat
           window.alert(optionsSubcategoria);
 
           console.log(optionsSubcategoria);
-
         }
       }
 

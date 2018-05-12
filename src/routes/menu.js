@@ -11,13 +11,13 @@ import gql from 'graphql-tag';
 
 
 class MyMenu extends Component{
-
   render() {
     if (this.props.queryInformacion.loading) {
       return <div>Loading...</div>
     }
-
     const infoUsuario=this.props.queryInformacion.userById
+    console.log(infoUsuario);
+    console.log("HOLA");
 
     return(
       <div class="ui vertical inverted left visible sidebar menu">
@@ -28,7 +28,9 @@ class MyMenu extends Component{
 
 
         <div class="div-image-profile-menu">
-          <Image src={infoUsuario.picture} size='small' verticalAlign='middle' circular  centered/>
+
+            <Image src={infoUsuario.picture} size='small' verticalAlign='middle' circular  centered/>
+
         </div>
           <a class="item" href="/">
             <i class="home icon"></i>
