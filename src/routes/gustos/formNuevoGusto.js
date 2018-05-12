@@ -8,6 +8,8 @@ import { GET_PLEASURES, ADD_PLEASURE, ALL_CATEGORIES, SUBCATEGORIES_BY_CATEGORY 
 
 const updateCache = (cache, { data: { createPleasure } }) => {
   const { pleasureByUser } = cache.readQuery({ query: GET_PLEASURES , variables: {user_id:1} })
+
+  console.log({pleasureByUser});
   cache.writeQuery({
     query: GET_PLEASURES,
     variables:{user_id:1},
@@ -37,6 +39,7 @@ export default class AccordionForm extends Component {
           <Popup
             trigger={<Button circular color='green' icon='plus'/>}
             content='Agrega tus gustos!'
+            on={['hover', 'click']}
           />
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 0}>

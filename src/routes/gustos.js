@@ -2,7 +2,6 @@ import React,{ Component } from 'react';
 import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal,Table} from 'semantic-ui-react';
 import Slider from "react-slick";
 import ModalEditarGusto from './gustos/modalEditarGusto'
-import ModalNuevoGusto from './gustos/modalNuevoGusto'
 import MyMenu from './menu'
 import gql from "graphql-tag";
 import { Query,graphql,compose } from "react-apollo";

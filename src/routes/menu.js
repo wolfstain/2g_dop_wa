@@ -16,8 +16,6 @@ class MyMenu extends Component{
       return <div>Loading...</div>
     }
     const infoUsuario=this.props.queryInformacion.userById
-    console.log(infoUsuario);
-    console.log("HOLA");
 
     return(
       <div class="ui vertical inverted left visible sidebar menu">

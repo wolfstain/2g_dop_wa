@@ -37,6 +37,24 @@ mutation createPleasure ($name: String!, $description: String!, $user_id: Int! ,
 }`
 ;
 
+
+
+export const UPDATE_PLEASURE=gql`
+mutation updateleasure($id: Int!,$name: String!, $description: String!, $user_id: Int! , $subcategory_id:Int!){
+  updatePleasure(id:$id,pleasure:{
+    name:$name,
+    description:$description,
+    user_id:$user_id,
+    subcategory_id:$subcategory_id
+  }){
+    name
+    description
+    user_id
+    subcategory_id
+  }
+}`
+;
+
 export const ALL_CATEGORIES=gql`
 query allCategories{
 	allCategories{

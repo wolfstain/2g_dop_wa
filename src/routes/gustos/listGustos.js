@@ -3,6 +3,8 @@ import Query from './Query.js'
 import { Mutation,graphql,compose  } from 'react-apollo'
 import { GET_PLEASURES,DELETE_PLEASURE,ALL_CATEGORIES,ALL_SUBCATEGORIES } from  '../../queries.js'
 import  {Grid,List,Loader,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal,Table} from 'semantic-ui-react';
+import ModalEditarGusto from './modalEditarGusto'
+
 
 
 const updateCache = (cache, { data: { deletePleasure } }) => {
@@ -59,9 +61,10 @@ class ListGustos extends Component{
           <Table.Body>
           <Query query={GET_PLEASURES} variables={{user_id:1}}>
             {({ pleasureByUser }) => {
-              return pleasureByUser.map(({ id,name,subcategory_id }) => (
+              return pleasureByUser.map(({ id,name,subcategory_id, description }) => (
                 <Table.Row>
-                  <Table.Cell><Icon name='like' /> {id}</Table.Cell>
+                  <Table.Cell><Icon name='like' /> {name}</Table.Cell>
+
                   <Table.Cell>{dictSubcategorias[subcategory_id][0]}</Table.Cell>
                   <Table.Cell>{dictCategorias[dictSubcategorias[subcategory_id][1]]}</Table.Cell>
 
@@ -81,6 +84,8 @@ class ListGustos extends Component{
                         </span>
                       )}
                     </Mutation>
+
+                    <ModalEditarGusto id={id} name={name} description={description} subcategory_id={subcategory_id} dictCategorias={dictCategorias} dictSubcategorias={dictSubcategorias} />
 
                   </Table.Cell>
                 </Table.Row>
