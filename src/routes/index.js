@@ -16,6 +16,7 @@ import Citas from './citas'
 
 import Posibles from './posibles'
 import GustoList from './GustoList'
+import editarInformacion from './editarInformacion'
 
 
 import 'semantic-ui-css/semantic.min.css'
@@ -30,6 +31,7 @@ export default ()=>(
         <Route path="/login" exact component={Login} />
         <Route path="/citas" exact component={Citas} />
         <Route path="/perfil" exact component={Perfil} />
+        <Route path="/EditarInformacion/:id" exact component={editarInformacion} />
         <Route path="/gustos" exact component={Gustos} />
         <Route path="/match" exact component={Match} />
         <Route path="/amigos" exact component={Amigos} />
