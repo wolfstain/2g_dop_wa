@@ -26,8 +26,8 @@ import "slick-carousel/slick/slick-theme.css";
 export default ()=>(
   <Router>
     <Switch>
-      <Route path="/" exact component={Home} />
-        <Route path="/login" exact component={Login} />
+      <Route path="/" exact component={Login} />
+        <Route path="/login" exact component={Home} />
         <Route path="/citas" exact component={Citas} />
         <Route path="/perfil" exact component={Perfil} />
         <Route path="/gustos" exact component={Gustos} />

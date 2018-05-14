@@ -2,7 +2,6 @@
 import React ,{Component}from 'react';
 import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal} from 'semantic-ui-react';
 import Slider from "react-slick";
-
 import MyMenu from './menu'
 
 const styles={

@@ -3,11 +3,10 @@ import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar} f
 import Slider from "react-slick";
 import Informacion from './perfil/informacion'
 import EditarInformacion from './perfil/editarInformacion'
-
 import {graphql,compose} from 'react-apollo';
 import gpl from 'graphql-tag';
 import gql from 'graphql-tag';
-
+import  { Redirect } from 'react-router-dom'
 
 
 class MyMenu extends Component{
@@ -17,6 +16,16 @@ class MyMenu extends Component{
     }
     const infoUsuario=this.props.queryInformacion.userById
 
+    if(!sessionStorage.getItem('id'))
+    {
+      return <Redirect to='/'/>
+    }
+
+  function handleClick(e) {
+    e.preventDefault();
+    sessionStorage.clear();
+    window.location.reload();
+  }
     return(
       <div class="ui vertical inverted left visible sidebar menu">
 
@@ -59,6 +68,10 @@ class MyMenu extends Component{
           <i class="like icon"></i>
           Encuentra personas!
           </a>
+          <a class="item" href="#" onClick={handleClick}>
+          <i class="like icon"></i>
+          Cerrar session
+          </a>
       </div>
 
     )
@@ -82,10 +95,10 @@ query DetailView($id: Int!){
 const queryOptions = {
   options: props => ({
     variables: {
-      id: 1,
+      id: sessionStorage.getItem('id'),
     },
   }),
 }
 
 
-export default graphql(queryInformacion, {name: 'queryInformacion',options: props => ({ variables: { id: 1 }}) })(MyMenu);
+export default graphql(queryInformacion, {name: 'queryInformacion',options: props => ({ variables: { id: sessionStorage.getItem('id') }}) })(MyMenu);

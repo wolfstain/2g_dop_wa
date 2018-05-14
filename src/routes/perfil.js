@@ -132,7 +132,7 @@ mutation updateUser($id: Int!,$name: String!, $gender: String!, $email: String!,
 const queryOptions = {
   options: props => ({
     variables: {
-      id: 1,
+      id: sessionStorage.getItem('id'),
     },
   }),
 }
@@ -141,6 +141,6 @@ const queryOptions = {
 /*export default graphql(query, queryOptions)(Perfil);*/
 
 export default compose(
-  graphql(queryInformacion, {name: 'queryInformacion',options: props => ({ variables: { id: 1 }}) }),
-  graphql(queryGustos, {name: 'queryGustos', options: props => ({ variables: { id: 1 }}) }),
+  graphql(queryInformacion, {name: 'queryInformacion',options: props => ({ variables: { id: sessionStorage.getItem('id') }}) }),
+  graphql(queryGustos, {name: 'queryGustos', options: props => ({ variables: { id: sessionStorage.getItem('id') }}) }),
 )(Perfil);
