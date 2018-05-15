@@ -74,6 +74,23 @@ query subcategoriesByCategory($category_id:Int!){
 }
 `;
 
+
+export const ADD_MATCH=gql`
+mutation createMatch($id_user_one:Int!, $id_user_two:Int!,$state_user_one:Int!){
+  createMatch(match:{
+    id_user_one:$id_user_one,
+    id_user_two:$id_user_two,
+    state_user_one:$state_user_one
+  }) {
+    id_user_one
+    id_user_two
+    state_user_one
+  }
+}`
+;
+
+
+
 export const ALL_SUBCATEGORIES=gql`
 query allSubcategories{
 	allSubcategories{
@@ -83,4 +100,25 @@ query allSubcategories{
     category_id
   }
 }`
+;
+
+export const ALL_USERS=gql`
+query allUsers{
+  allUsers{
+    id
+    name
+    gender
+    picture
+    age
+  }
+}`
+;
+
+export const FILTER_LIST=gql`
+mutation filtrateListPossibles($id:Int!, $listUsers:[Int]!){
+  filtrateListPossibles(id:$id,listUsers:{listUsers:$listUsers}){
+    listUsersFiltered
+  }
+}
+`
 ;

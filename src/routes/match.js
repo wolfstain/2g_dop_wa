@@ -3,6 +3,8 @@ import  {Grid,List,Segment,Card,Form,Image,Menu,Button,Icon,Divider,Header,Sideb
 import Slider from "react-slick";
 import MyMenu from './menu'
 
+import PosiblesMatch from './matchs/posiblesMatch.js'
+
 const styles={
   gridContent:{
     height:'100%',
@@ -171,10 +173,9 @@ class Match extends Component{
                       </Card.Content>
                     </Card>
                   </div>
-
-
-
                 </Slider>
+
+                <PosiblesMatch />
 
 
 

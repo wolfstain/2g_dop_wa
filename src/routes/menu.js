@@ -27,7 +27,7 @@ class MyMenu extends Component{
 
         <div class="div-image-profile-menu">
 
-            <Image src={infoUsuario.picture} size='small' verticalAlign='middle' circular  centered/>
+            <Image src={infoUsuario.picture}  size='small' verticalAlign='middle' circular  centered/>
 
         </div>
           <a class="item" href="/">

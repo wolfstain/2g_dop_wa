@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import Query from './Query.js'
+import Query from '../Query.js'
 import { Mutation,graphql,compose  } from 'react-apollo'
 import { GET_PLEASURES,DELETE_PLEASURE,ALL_CATEGORIES,ALL_SUBCATEGORIES } from  '../../queries.js'
 import  {Grid,List,Loader,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal,Table} from 'semantic-ui-react';
@@ -9,6 +9,7 @@ import ModalEditarGusto from './modalEditarGusto'
 
 const updateCache = (cache, { data: { deletePleasure } }) => {
   const { pleasureByUser } = cache.readQuery({ query: GET_PLEASURES , variables: {user_id:1} })
+  console.log({pleasureByUser});
   cache.writeQuery({
     query: GET_PLEASURES,
     variables:{user_id:1},
@@ -28,13 +29,13 @@ class ListGustos extends Component{
     console.log(response)
   }
   render() {
-    if (this.props.queryCategorias.loading || this.props.queryGustos.loading|| this.props.querySubcategorias.loading) {
+    if (this.props.queryCategorias.loading || this.props.querySubcategorias.loading) {
       return <div>Loading...</div>
     }
 
     const subcategorias=this.props.querySubcategorias.allSubcategories
     const categorias=this.props.queryCategorias.allCategories
-    const gustos=this.props.queryGustos.pleasureByUser
+
 
     const dictSubcategorias={}
     const dictCategorias={}
@@ -100,7 +101,6 @@ class ListGustos extends Component{
 }
 
 export default compose(
-  graphql(GET_PLEASURES, {name: 'queryGustos', options: props => ({ variables: { id: 1 }}) }),
   graphql(ALL_CATEGORIES, {name: 'queryCategorias'}),
   graphql(ALL_SUBCATEGORIES, {name: 'querySubcategorias'})
 )(ListGustos);

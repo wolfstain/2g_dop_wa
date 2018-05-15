@@ -60,3 +60,41 @@ body,#root{
   background: #00000014 !important;
   color: #7ecaec !important;
 }
+.myCard .card{
+  box-shadow: none;
+  background: #00000066;
+  padding: 15px;
+  border-radius: 15px;
+}
+.myCard .header{
+color: #fff !important;
+font-size: 1.5em !important;
+margin-top: 10px !important;
+}
+
+
+
+/*Botones*/
+.violet{
+  background-color: #8a0c38 !important;
+}
+
+.blue{
+  background-color: #194f69 !important;
+}
+
+.button{
+  border: 2px solid transparent !important;
+}
+.button:hover{
+  border: 2px solid #fff !important;
+}
+
+
+
+
+.myCard .meta{
+color: #fff !important;
+font-size: 1em !important;
+margin-top: 7px !important;
+}

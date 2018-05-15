@@ -56,23 +56,13 @@ const ModalEditarGusto = ({id,name,description, subcategory_id, dictCategorias,d
                     <Form.Select onChange={handleChange} fluid label='Categoria' name='category_id' options={optionsCategoria} placeholder='Categoria' />
                     <Form.Select onChange={handleChange} fluid label='SubCategoria' name='subcategory_id' options={optionsSubcategoria} placeholder='SubCategoria' />
                   </Form.Group>
-                  <Button type='submit'>Crear</Button>
+                  <Button type='submit' color="blue">Editar</Button>
                 </Form>
             )}
           </Mutation>
 
-
-          <Form.Group widths='equal'>
-            <Form.Input  onChange={handleChange} name="name" fluid label='' placeholder={name} />
-            <Form.Input onChange={handleChange} name="description" fluid label='Descripcion' placeholder={description} />
-          </Form.Group>
         </Modal.Description>
       </Modal.Content>
-      <Modal.Actions>
-        <Button primary>
-          Proceed <Icon name='right chevron' />
-        </Button>
-      </Modal.Actions>
     </Modal>
 
   )
