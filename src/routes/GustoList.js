@@ -53,7 +53,7 @@ class GustoList extends Component {
 
 const GET_PLEASURES_BY_ID = gql`
 query GustosUsuario{
-  pleasureByUser(user_id:3){
+  pleasureByUser(user_id:2){
     subcategory_id
   }
 }
