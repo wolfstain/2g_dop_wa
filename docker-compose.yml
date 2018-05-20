@@ -1,0 +1,7 @@
+version: '2'
+services:
+ dop-wa:
+   build: .
+   command: bash -c "yarn start"
+   ports:
+     - "3006:3006"
