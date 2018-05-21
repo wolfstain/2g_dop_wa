@@ -111,13 +111,13 @@ class editarInformacion extends React.Component {
       <div class="pusher">
       <Grid columns={2} centered verticalAlign='left' style={styles.gridContent}>
 
-    <Grid.Column width={6} style={styles.columnInformation}>
-
+    <Grid.Column width={9} style={styles.columnInformation}>
+	<div class="ui large form">
         <Table responsive>
           <tbody>
           <tr>
             <td><h12>Nombre: </h12></td>
-            <td><h12><Input ref={this.handleRef} type = "text" value={this.state.name} placeholder='Name' onChange={e => this.setState({name: e.target.value})}/></h12></td>
+            <td><h12><Input ref={this.handleRef} type = "text" value={this.state.name} placeholder='Nombre' onChange={e => this.setState({name: e.target.value})}/></h12></td>
           </tr>
           <tr>
             <td><h12>Género: </h12></td>
@@ -129,7 +129,7 @@ class editarInformacion extends React.Component {
           </tr>
           <tr>
             <td><h12>Edad: </h12></td>
-            <td><h12><Input ref={this.handleRef} type = "text" value={this.state.age} placeholder='Edad' onChange={e => this.setState({age: e.target.value})}/></h12></td>
+            <td><h12><Input  readonly ref={this.handleRef} type = "text" value={this.state.age} placeholder='Edad' onChange={e => this.setState({age: e.target.value})}/></h12></td>
           </tr>
           <tr>
             <td><h12>Password: </h12></td>
@@ -137,7 +137,7 @@ class editarInformacion extends React.Component {
           </tr>
           </tbody>
           </Table>
-          <Grid.Column width={6} style={styles.columnImg}>
+          <Grid.Column width={9} style={styles.columnImg}>
             <Table responsive>
               <tbody>
               <tr>
@@ -165,7 +165,9 @@ class editarInformacion extends React.Component {
               </tr>
               </tbody>
               </Table>
-              </Grid.Column>
+	</Grid.Column>
+	</div>
+              
           <div className='flex justify-between'>
           <br/>
            <button onClick={() => this._createLink()}>Actualizar información</button>
