@@ -48,7 +48,7 @@ firebase.initializeApp(config);
 
 
 const upeuser = gql`
-mutation updateUser($id: Int!,$name: String!, $gender: String!,$email: String!, $picture:String!, $age:String!, $password:String!){
+mutation updateUser($id: Int!,$name: String, $gender: String,$email: String, $picture:String, $age:String, $password:String){
   updateUser(id: $id,user:{
     name: $name,
     gender: $gender,
