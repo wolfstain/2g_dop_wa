@@ -10,7 +10,7 @@ import ApolloClient from "apollo-boost";
 
 
 const client = new ApolloClient({
-  uri: "http://35.203.25.118/graphql"
+  uri: "http://35.227.46.47/graphql"
 });
 
 

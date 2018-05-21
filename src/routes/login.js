@@ -30,7 +30,7 @@ class Login extends Component{
 
     //mutation { createToken(auth:{auth:{email:\"`+this.state.email+`\",password:\"`+this.state.password+`\"}}){jwt}}
       axios({
-          url: 'http://35.203.25.118/graphql',
+          url: 'http://35.227.46.47/graphql',
           method: 'post',
           data: {
             query: `
@@ -49,7 +49,7 @@ class Login extends Component{
         })
         .then(function (response) {
                    
-            if(response.data.errors){
+            if(response.data.data.auth.auth.answer=="false"){
               alert("Datos inválidos");              
             }
             else{
