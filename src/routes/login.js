@@ -1,7 +1,8 @@
 import React,{ Component } from 'react';
 import  {Grid,Form,Button,Icon,Divider} from 'semantic-ui-react';
 import Slider from "react-slick";
-
+import axios from 'axios';
+import  { Redirect } from 'react-router-dom'
 
 const styles={
   grid:{
@@ -15,7 +16,57 @@ const styles={
 }
 
 class Login extends Component{
+
+ constructor(props){
+    super(props);
+    this.state={
+      email:'',
+      password:''
+    }
+  }
+
+ handleClick(event){
+    //alert(this.state.username);
+
+    //mutation { createToken(auth:{auth:{email:\"`+this.state.email+`\",password:\"`+this.state.password+`\"}}){jwt}}
+      axios({
+          url: 'http://35.203.64.114/graphql',
+          method: 'post',
+          data: {
+            query: `
+                           mutation {
+                auth(auth:{
+                  email: \"`+this.state.email+`\",
+                  password: \"`+this.state.password+`\"
+                }) {
+                  token
+                  auth{answer}
+                  id
+                }
+              }
+            `
+          }
+        })
+        .then(function (response) {
+
+            if(response.data.data.auth.auth.answer=="false"){
+              alert("Datos inválidos");
+            }
+            else{
+
+             var token=response.data.data.auth.token;
+             sessionStorage.setItem('token', token);
+             var id=response.data.data.auth.id;
+             sessionStorage.setItem('id', id);
+             //console.log(response.data.data.createToken.jwt);
+             window.location.reload();
+            }
+      });
+  }
+
+
   render() {
+    var self=this;
     var settings = {
      dots: true,
      infinite: true,
@@ -26,6 +77,20 @@ class Login extends Component{
      pauseOnHover: true
    };
 
+   const args={}
+  const handleChange=(ev,input)=>{
+    args[input.name]= input.value;
+    console.log(input.name);
+    console.log(args);
+    this.setState(args);
+    console.log(this.state)
+    //console.log(this.state.input.name);
+  }
+
+  if(sessionStorage.getItem('token'))
+  {
+      return <Redirect to='/perfil'/>
+  }
 
     return(
 
@@ -49,24 +114,15 @@ class Login extends Component{
               <img src="images/dop-logo2.png" />
             </div>
             <div style={styles.divLogin}>
-              <Form>
-                <Form.Field>
-                  <input placeholder='Correo' />
-                </Form.Field>
-                <Form.Field>
-                  <input type="password" placeholder='Contraseña' />
-                </Form.Field>
-                <Button primary fluid type='submit'>Ingresar</Button>
-
-                <Divider horizontal>O</Divider>
-
-                <Button color='facebook'>
-                  <Icon name='facebook' /> Iniciar con facebook
-                </Button>
-                <Button color='twitter'>
-                  <Icon name='twitter' /> Iniciar con Twitter
-                </Button>
-              </Form>
+             <Form >
+          <Form.Field>
+             <Form.Input name="email" onChange={handleChange} placeholder='email o nombre de usuario' icon={<Icon name="check circle outline" size="large" />} />
+           </Form.Field>
+           <Form.Field>
+             <Form.Input name="password" onChange={handleChange} type="password" placeholder='Password' icon={<Icon name="remove circle outline" color="red" size="large" />} />
+           </Form.Field>
+           <Button type='submit' primary fluid onClick={(event) => this.handleClick(event)}>Iniciar sesión</Button>
+        </Form>
 
             </div>
           </Grid.Column>

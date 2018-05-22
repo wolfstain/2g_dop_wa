@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import Informacion from './perfil/informacion'
 import EditarInformacion from './perfil/editarInformacion'
 import MyMenu from './menu'
+import {USER_INFORMATION,UPDATE_USER,GET_PLEASURES} from  '../queries.js'
 
 import {graphql,compose} from 'react-apollo';
 import gpl from 'graphql-tag';
@@ -62,8 +63,6 @@ class Perfil extends Component{
     const infoUsuario=this.props.queryInformacion.userById
     const gustosUsuario=this.props.queryGustos.pleasureByUser
 
-
-
     return(
 
       <div id="contenido-principal">
@@ -88,51 +87,10 @@ class Perfil extends Component{
 }
 
 
-const queryInformacion = gql`
-query DetailView($id: Int!){
-  userById(id: $id) {
-    id,
-    name
-    picture
-    age
-    email
-    gender
-  }
-}`
-;
-
-const queryGustos = gql`
-query PleasureUser($id: Int!){
-  pleasureByUser(user_id: $id){
-   name
-   description
-   user_id
-   subcategory_id
- }
-}`
-;
-
-const updateuser = gql`
-mutation updateUser($id: Int!,$name: String!, $gender: String!, $email: String!, $age: String!, $picture: String!){
-  updateUser(id: $id,user:{
-    name: $name,
-    gender: $gender,
-    email: $email,
-    age: $age,
-    picture: $picture,
-  })
-  {
-    name
-    gender
-  }
-}`
-;
-
-
 const queryOptions = {
   options: props => ({
     variables: {
-      id: 1,
+      id: sessionStorage.getItem('id'),
     },
   }),
 }
@@ -141,6 +99,6 @@ const queryOptions = {
 /*export default graphql(query, queryOptions)(Perfil);*/
 
 export default compose(
-  graphql(queryInformacion, {name: 'queryInformacion',options: props => ({ variables: { id: 1 }}) }),
-  graphql(queryGustos, {name: 'queryGustos', options: props => ({ variables: { id: 1 }}) }),
+  graphql(USER_INFORMATION, {name: 'queryInformacion',options: props => ({ variables: { id: sessionStorage.getItem('id') }}) }),
+  graphql(GET_PLEASURES, {name: 'queryGustos', options: props => ({ variables: { user_id: sessionStorage.getItem('id') }}) }),
 )(Perfil);

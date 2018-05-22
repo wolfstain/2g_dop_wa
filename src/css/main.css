@@ -91,7 +91,9 @@ margin-top: 10px !important;
 }
 
 
-
+.ui.dropdown .menu>.item{
+  color: #fff !important;
+}
 
 .myCard .meta{
 color: #fff !important;

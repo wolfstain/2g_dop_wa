@@ -8,11 +8,11 @@ import ModalEditarGusto from './modalEditarGusto'
 
 
 const updateCache = (cache, { data: { deletePleasure } }) => {
-  const { pleasureByUser } = cache.readQuery({ query: GET_PLEASURES , variables: {user_id:1} })
+  const { pleasureByUser } = cache.readQuery({ query: GET_PLEASURES , variables: {user_id:parseInt(sessionStorage.getItem('id'))} })
   console.log({pleasureByUser});
   cache.writeQuery({
     query: GET_PLEASURES,
-    variables:{user_id:1},
+    variables:{user_id:parseInt(sessionStorage.getItem('id'))},
     data: {
       pleasureByUser: pleasureByUser.filter(pleasure => pleasure.id !== deletePleasure.id)
     }
@@ -60,7 +60,7 @@ class ListGustos extends Component{
             </Table.Row>
           </Table.Header>
           <Table.Body>
-          <Query query={GET_PLEASURES} variables={{user_id:1}}>
+          <Query query={GET_PLEASURES} variables={{user_id:parseInt(sessionStorage.getItem('id'))}}>
             {({ pleasureByUser }) => {
               return pleasureByUser.map(({ id,name,subcategory_id, description }) => (
                 <Table.Row>

@@ -7,12 +7,12 @@ import { GET_PLEASURES, ADD_PLEASURE, ALL_CATEGORIES, SUBCATEGORIES_BY_CATEGORY 
 
 
 const updateCache = (cache, { data: { createPleasure } }) => {
-  const { pleasureByUser } = cache.readQuery({ query: GET_PLEASURES , variables: {user_id:1} })
+  const { pleasureByUser } = cache.readQuery({ query: GET_PLEASURES , variables: {user_id:parseInt(sessionStorage.getItem('id'))} })
 
   console.log({pleasureByUser});
   cache.writeQuery({
     query: GET_PLEASURES,
-    variables:{user_id:1},
+    variables:{user_id:parseInt(sessionStorage.getItem('id'))},
     data: {
       pleasureByUser: pleasureByUser.concat(createPleasure)
     }
@@ -51,14 +51,12 @@ export default class AccordionForm extends Component {
 }
 
 
-
-
 const Categories = () => {
   let optionsCategoria=[]
   let optionsSubcategoria=[]
   let dictSubcategorias={}
   let dictCategorias={}
-  let args={'user_id':1}
+  let args={'user_id':parseInt(sessionStorage.getItem('id'))}
 
   function resetForm() {
     document.getElementById("form").reset();

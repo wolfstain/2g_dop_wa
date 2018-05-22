@@ -8,7 +8,7 @@ import { Mutation,Query } from 'react-apollo'
 
 
 const ModalEditarGusto = ({id,name,description, subcategory_id, dictCategorias,dictSubcategorias}) => {
-  let args={'id':parseInt(id),'user_id':1, 'name':name,description:'description',subcategory_id:parseInt(subcategory_id)}
+  let args={'id':parseInt(id),'user_id':parseInt(sessionStorage.getItem('id')), 'name':name,description:'description',subcategory_id:parseInt(subcategory_id)}
   let optionsCategoria=[]
   let optionsSubcategoria=[]
 

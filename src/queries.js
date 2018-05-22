@@ -1,5 +1,38 @@
 import gql from "graphql-tag";
 
+
+export const USER_INFORMATION= gql`
+query DetailView($id: Int!){
+  userById(id: $id) {
+    id,
+    name
+    picture
+    age
+    email
+    gender
+  }
+}`
+;
+
+
+export const UPDATE_USER = gql`
+mutation updateUser($id: Int!,$name: String!, $gender: String!, $email: String!, $age: String!, $picture: String!){
+  updateUser(id: $id,user:{
+    name: $name,
+    gender: $gender,
+    email: $email,
+    age: $age,
+    picture: $picture,
+  })
+  {
+    name
+    gender
+  }
+}`
+;
+
+
+
 export const DELETE_PLEASURE=gql`
 mutation deletePleasure ($id:Int!){
   deletePleasure(id:$id){
@@ -122,3 +155,31 @@ mutation filtrateListPossibles($id:Int!, $listUsers:[Int]!){
 }
 `
 ;
+
+
+export const MARTCH_BY_USER=gql`
+query matchByUser($id:Int!){
+  matchByUser(id:$id){
+    id
+    id_user_one
+    id_user_two
+  }
+}
+`;
+
+
+export const ACCEPTED_BY_USER=gql`
+query acceptedByUser($id:Int!){
+  acceptedByUser(id:$id){
+    id_user_accepted
+  }
+}
+`;
+
+export const REJECTED_BY_USER=gql`
+query rejectedByUser($id:Int!){
+  rejectedByUser(id:$id){
+    id_user_rejected
+  }
+}
+`;

@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal} from 'semantic-ui-react';
 import Slider from "react-slick";
 import ModalEditarGusto from './gustos/modalEditarGusto'
-import ModalNuevoGusto from './gustos/modalNuevoGusto'
+import ListAmigos from './amigos/listAmigos'
 import MyMenu from './menu'
 
 
@@ -49,54 +49,7 @@ class Amigos extends Component{
                          Tus amigos!
                        </Header.Subheader>
                     </Header>
-                    <List divided verticalAlign='middle' size={'massive'}>
-                       <List.Item>
-                         <List.Content floated='right'>
-                           <Button circular color='green' icon='eye' />
-                           <Button circular color='violet' icon='user delete' />
-                           <Button circular color='blue' icon='chat' />
-                         </List.Content>
-                         <Image avatar src='images/helen.jpg' />
-                         <List.Content>
-                           Hellen
-                         </List.Content>
-                       </List.Item>
-                       <List.Item>
-                         <List.Content floated='right'>
-                           <Button circular color='green' icon='eye' />
-                           <Button circular color='violet' icon='user delete' />
-                           <Button circular color='blue' icon='chat' />
-                         </List.Content>
-                         <Image avatar src='images/christian.jpg' />
-                         <List.Content>
-                           Christian
-                         </List.Content>
-                       </List.Item>
-                       <List.Item>
-                         <List.Content floated='right'>
-                           <Button circular color='green' icon='eye' />
-                           <Button circular color='violet' icon='user delete' />
-                           <Button circular color='blue' icon='chat' />
-                         </List.Content>
-                         <Image avatar src='images/daniel.jpg' />
-                         <List.Content>
-                           Daniel
-                         </List.Content>
-                       </List.Item>
-                       <List.Item>
-                         <List.Content floated='right'>
-                           <Button circular color='green' icon='eye' />
-                           <Button circular color='violet' icon='user delete' />
-                           <Button circular color='blue' icon='chat' />
-                         </List.Content>
-                         <Image avatar src='images/helen.jpg' />
-                         <List.Content>
-                           Hellen
-                         </List.Content>
-                       </List.Item>
-
-                     </List>
-
+                    <ListAmigos />            
                   </div>
             </Grid.Column>
         </Grid>
