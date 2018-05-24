@@ -183,3 +183,22 @@ query rejectedByUser($id:Int!){
   }
 }
 `;
+
+export const CREATE_LUGAR=gql`
+mutation createLugar($nombre:String! , $nivelPrecio:String! , $coordinates: [Float]!,$point:String!, $index:String!){
+  createLugar(lugar: {
+    nombre: $nombre,
+    nivelPrecio: $nivelPrecio,
+    ubicacion: {
+      type: $point,
+      coordinates: $coordinates,
+      index: $index
+    }
+  })
+  {
+    _id
+    nombre
+    nivelPrecio
+  }
+}
+`;

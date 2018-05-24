@@ -3,6 +3,11 @@ body,#root{
   height: 100%;
 }
 
+ #app, #map {
+  height: 500px;
+  width: 100%;
+}
+
 
 #contenido-principal{
   min-height: 100%;
