@@ -46,7 +46,7 @@ export default class App extends Component {
     map.addListener('click', function(e) {
       clearMarkers(null);
       placeMarkerAndPanTo(e.latLng, map);
-      App.args['coordinates']=[parseFloat(e.latLng.lat()),parseFloat(e.latLng.lng())]
+      App.args['coordinates']=[parseFloat(e.latLng.lng()),parseFloat(e.latLng.lat())]
     });
   }
 
