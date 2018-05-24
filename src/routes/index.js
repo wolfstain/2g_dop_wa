@@ -16,6 +16,7 @@ import Citas from './citas'
 
 import Posibles from './posibles'
 import GustoList from './GustoList'
+import Perfil_amigos from './perfil_amigo'
 
 
 import 'semantic-ui-css/semantic.min.css'
@@ -26,10 +27,11 @@ import "slick-carousel/slick/slick-theme.css";
 export default ()=>(
   <Router>
     <Switch>
-      <Route path="/" exact component={Home} />
-        <Route path="/login" exact component={Login} />
+      <Route path="/" exact component={Login} />
+        <Route path="/login" exact component={Home} />
         <Route path="/citas" exact component={Citas} />
         <Route path="/perfil" exact component={Perfil} />
+        <Route path="/perfil_amigo/:id" exact component={Perfil_amigos} />
         <Route path="/gustos" exact component={Gustos} />
         <Route path="/match" exact component={Match} />
         <Route path="/amigos" exact component={Amigos} />

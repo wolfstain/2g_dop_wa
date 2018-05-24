@@ -18,51 +18,56 @@ export default({styles, handleClick, datosUsuario , gustosUsuario})=>{
            </Header.Subheader>
         </Header>
           <div class="subdiv-information">
-            <h2>Información basica</h2>
+              <Grid.Column width={6} style={styles.columnPerfil}>
+                <Image src={datosUsuario.picture} size='small' circular centered/>
+              </Grid.Column>
 
-            <List>
-              <List.Item>Nombre: {datosUsuario.name}</List.Item>
-              <List.Item>Correo: {datosUsuario.email}</List.Item>
-                <List.Item>Sexo: {datosUsuario.gender}</List.Item>
-              <List.Item>Numero: {datosUsuario.age}</List.Item>
-            </List>
-            <div class="div-buttonsInfo">
-               <a href={`/perfil/editarInformacion/${datosUsuario.id}`}><Button onClick={handleClick} circular color='blue' icon='write' />
-               </a>
-             </div>
-          </div>
-          <div class="subdiv-information">
-             <h2>Gustos</h2>
-              <List>
+              <Grid.Column width={6} style={styles.columnInformation}>
+                <h2>Información basica</h2>
 
-                {gustosUsuario.map(gusto =>(
-                  <List.Item>{gusto.name}</List.Item>
-                ))}
+                <List>
+                  <List.Item>Nombre: {datosUsuario.name}</List.Item>
+                  <List.Item>Correo: {datosUsuario.email}</List.Item>
+                    <List.Item>Sexo: {datosUsuario.gender}</List.Item>
+                  <List.Item>Edad: {datosUsuario.age}</List.Item>
+                </List>
+                <div class="div-buttonsInfo">
+                   <Button onClick={handleClick}circular color='blue' icon='write' />
+                </div>
+                </Grid.Column>
+              </div>
+              <div class="subdiv-information">
+                 <h2>Gustos</h2>
+                  <List>
 
-              </List>
-              <div class="div-buttonsInfo">
-                 <Link to="gustos">
-                   <Button circular color='violet' icon='eye' />
+                    {gustosUsuario.map(gusto =>(
+                      <List.Item>{gusto.name}</List.Item>
+                    ))}
 
-                 </Link>
+                  </List>
+                  <div class="div-buttonsInfo">
+                     <Link to="gustos">
+                       <Button circular color='violet' icon='eye' />
 
-               </div>
-          </div>
-          <div class="subdiv-information" >
-            <h2>Lugares</h2>
-            <List>
-              <List.Item>Nombre: Miguel Cortes</List.Item>
-              <List.Item>Correo: miguel_96410@hotmail.com</List.Item>
-                <List.Item>Numero: 3213456978</List.Item>
-              <List.Item>Numero: Edad</List.Item>
-              <List.Item>Pais: Colombia</List.Item>
-            </List>
-            <div class="div-buttonsInfo">
-               <Button onClick={handleClick} circular color='green' icon='plus' />
-               <Button circular color='violet' icon='remove' />
-               <Button circular color='blue' icon='write' />
-             </div>
-          </div>
+                     </Link>
+
+                   </div>
+              </div>
+              <div class="subdiv-information" >
+                <h2>Lugares</h2>
+                <List>
+                  <List.Item>Nombre: Miguel Cortes</List.Item>
+                  <List.Item>Correo: miguel_96410@hotmail.com</List.Item>
+                    <List.Item>Numero: 3213456978</List.Item>
+                  <List.Item>Numero: Edad</List.Item>
+                  <List.Item>Pais: Colombia</List.Item>
+                </List>
+                <div class="div-buttonsInfo">
+                   <Button onClick={handleClick} circular color='green' icon='plus' />
+                   <Button circular color='violet' icon='remove' />
+                   <Button circular color='blue' icon='write' />
+                 </div>
+              </div>
         </div>
     )
 }

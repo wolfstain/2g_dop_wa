@@ -68,7 +68,9 @@ class ListAmigos extends Component{
           console.log(allUsers[match.id_user-1].picture),
           <List.Item>
             <List.Content floated='right'>
+            <a href = {`perfil_amigo/${match.id_user}`}>
               <Button circular color='green' icon='eye' />
+            </a>
               <Button circular color='violet' icon='user delete' />
               <Button circular color='blue' icon='chat' />
             </List.Content>
