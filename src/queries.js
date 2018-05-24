@@ -202,3 +202,14 @@ mutation createLugar($nombre:String! , $nivelPrecio:String! , $coordinates: [Flo
   }
 }
 `;
+
+
+export const GET_ALL_LUGARES=gql`
+query alllugares{
+  alllugares{
+    _id
+    nombre
+    nivelPrecio
+  }
+}
+`;

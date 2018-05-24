@@ -3,6 +3,8 @@ import React ,{Component}from 'react';
 import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal} from 'semantic-ui-react';
 import Slider from "react-slick";
 import Lugar from './lugares/lugares'
+import ListLugar from './lugares/listLugares'
+import ModalViewLugar from './lugares/viewLugar'
 import { withGoogleMap, GoogleMap, Marker,withScriptjs } from "react-google-maps"
 
 import MyMenu from './menu'
@@ -40,7 +42,11 @@ class Home extends Component{
       <div class="pusher">
         <Grid columns={2} centered verticalAlign='middle' style={styles.gridContent}>
             <Grid.Column width={6} style={styles.columnInformation}>
+              <ModalViewLugar latlng={{'lat':4.613487497133994,'lng':-74.08870888681639}}/>
+
               <Lugar />
+              <ListLugar />
+
 
             </Grid.Column>
         </Grid>
