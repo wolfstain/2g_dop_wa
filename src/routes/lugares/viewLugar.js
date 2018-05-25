@@ -80,7 +80,7 @@ class ViewLugar extends Component {
             infoWindow.setContent('Usted esta Aqui!');
             map.setCenter(pos);
           }, function() {
-            handleLocationError(true, infoWindow, this.map.getCenter());
+            //handleLocationError(true, infoWindow, this.map.getCenter());
           });
         } else {
           handleLocationError(false, infoWindow, this.map.getCenter());

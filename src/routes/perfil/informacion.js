@@ -52,22 +52,7 @@ export default({styles, handleClick, datosUsuario , gustosUsuario})=>{
                      </Link>
 
                    </div>
-              </div>
-              <div class="subdiv-information" >
-                <h2>Lugares</h2>
-                <List>
-                  <List.Item>Nombre: Miguel Cortes</List.Item>
-                  <List.Item>Correo: miguel_96410@hotmail.com</List.Item>
-                    <List.Item>Numero: 3213456978</List.Item>
-                  <List.Item>Numero: Edad</List.Item>
-                  <List.Item>Pais: Colombia</List.Item>
-                </List>
-                <div class="div-buttonsInfo">
-                   <Button onClick={handleClick} circular color='green' icon='plus' />
-                   <Button circular color='violet' icon='remove' />
-                   <Button circular color='blue' icon='write' />
-                 </div>
-              </div>
+              </div>              
         </div>
     )
 }
