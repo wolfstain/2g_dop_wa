@@ -114,7 +114,7 @@ class Cita extends Component{
                   {this.listAmigos.map((match)=>(
                     <List.Item>
                       <List.Content floated='right'>
-                        <Checkbox onChange={this.handleChange} value={parseInt(match.id_user-1)}  />
+                        <Checkbox onChange={this.handleChange} value={parseInt(match.id_user)}  />
                       </List.Content>
                       <Image avatar src={this.infoUsers[match.id_user].picture} />
                       <List.Content>
