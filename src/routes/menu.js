@@ -30,7 +30,7 @@ class MyMenu extends Component{
       <div class="ui vertical inverted left visible sidebar menu">
 
         <div class="div-image-logo-menu">
-          <Image src="images/dop-logo2.png" verticalAlign='middle' centered/>
+          <Image src="images/dop_logo_color.png" verticalAlign='middle' centered/>
         </div>
 
 

@@ -1,7 +1,9 @@
-
 import React ,{Component}from 'react';
 import  {Grid,List,Segment,Form,Image,Menu,Button,Icon,Divider,Header,Sidebar,Modal} from 'semantic-ui-react';
 import Slider from "react-slick";
+import Lugar from './lugares/lugares'
+import ListLugar from './lugares/listLugares'
+import { withGoogleMap, GoogleMap, Marker,withScriptjs } from "react-google-maps"
 
 import MyMenu from './menu'
 
@@ -29,8 +31,8 @@ const styles={
   }
 }
 
-class Home extends Component{
 
+class Home extends Component{
   render() {
     return(
       <div id="contenido-principal">
@@ -38,6 +40,8 @@ class Home extends Component{
       <div class="pusher">
         <Grid columns={2} centered verticalAlign='middle' style={styles.gridContent}>
             <Grid.Column width={6} style={styles.columnInformation}>
+              <Lugar />
+              <ListLugar />
             </Grid.Column>
         </Grid>
       </div>
