@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 export const USER_INFORMATION= gql`
 query DetailView($id: Int!){
   userById(id: $id) {
-    id,
+    id
     name
     picture
     age
@@ -199,6 +199,11 @@ mutation createLugar($nombre:String! , $nivelPrecio:String! , $coordinates: [Flo
     _id
     nombre
     nivelPrecio
+    ubicacion{
+      type
+      coordinates
+      index
+    }
   }
 }
 `;
@@ -210,6 +215,67 @@ query alllugares{
     _id
     nombre
     nivelPrecio
+    ubicacion{
+      coordinates
+    }
+  }
+}
+`;
+export const LUGAR_BY_ID=gql`
+query lugarById($id:Int!){
+  lugarById(id:$id){
+    nombre
+    nivelPrecio
+    ubicacion{
+      coordinates
+    }
+  }
+}
+`;
+
+
+export const DELETE_LUGAR=gql`
+mutation deleteLugar($id:Int!){
+  deleteLugar(id:$id){
+    _id
+  }
+}
+`;
+
+
+
+
+
+export const CITA_BY_PERSON=gql`
+query citaByPersonaId($id:Int!){
+  citaByPersonaId(id:$id){
+    id
+    cita
+    lugar
+    fecha
+    estado
+    personas
+  }
+}
+`;
+
+export const CREATE_CITA=gql`
+mutation createCita($cita:String!,$lugar:Int!,$fecha:String!,$personas:[Int]!, $estado:String!){
+  createCita(cita:{
+    cita:$cita,
+    lugar:$lugar,
+    fecha: $fecha,
+    personas:$personas,
+    estado:$estado,
+    visibilidad:false
+  }){
+    id
+    cita
+    lugar
+    personas
+    fecha
+    estado
+    visibilidad
   }
 }
 `;

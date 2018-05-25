@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Header, Icon, Modal , Form,Accordion , Label,Popup} from 'semantic-ui-react'
+import { Button, Header, Icon, Modal , Form,Accordion , Label,Popup,Grid} from 'semantic-ui-react'
 import { Mutation,Query } from 'react-apollo'
 import { withState } from 'recompose'
-import { CREATE_LUGAR} from '../../queries.js'
+import { CREATE_LUGAR,GET_ALL_LUGARES} from '../../queries.js'
 
 
 var markers = [];
@@ -40,6 +40,18 @@ function eventFire(el, etype){
 }
 
 
+const updateCache = (cache, { data: { createLugar } }) => {
+  const { alllugares } = cache.readQuery({ query: GET_ALL_LUGARES})
+  cache.writeQuery({
+    query: GET_ALL_LUGARES,
+    data: {
+      alllugares: alllugares.concat(createLugar)
+    }
+  })
+}
+
+
+
 const styles={
   modalMap:{
     marginTop:'0px',
@@ -48,11 +60,11 @@ const styles={
 
 const ModalExampleCloseIcon = () => (
 
-  <Modal style={styles.modalMap} trigger={<Button circular color='blue' icon='write' />} closeIcon>
-    <Modal.Header>Editar gusto</Modal.Header>
+  <Modal style={styles.modalMap} trigger={<Button circular color='green' icon='plus' />} closeIcon>
+    <Modal.Header>Crea tu Lugar!</Modal.Header>
     <Modal.Content scrolling>
       <Modal.Description>
-      <App />
+        <App />
       </Modal.Description>
     </Modal.Content>
   </Modal>
@@ -127,25 +139,35 @@ class App extends Component {
   render() {
     return (
       <div id='app'>
-        <div id='map' />
-          <Mutation mutation={CREATE_LUGAR} variables={App.args}>
-            {createLugar => (
-                <Form id="form"
-                  onSubmit={async e => {
-                    e.preventDefault();
-                    await createLugar({variables:App.args});
-                    eventFire(document.getElementsByClassName('close icon')[0], 'click');
-                    this.args={}
-                  }}
-                  >
-                  <Form.Group widths='equal'>
-                    <Form.Input  name="nombre" onChange={this.handleChange} fluid label='Nombre' placeholder='Nombre' />
-                    <Form.Select onChange={this.handleChange} fluid label='Nivel/precio' name='nivelPrecio' options={this.optionsPrecio} placeholder='Nivel/precio' />
-                  </Form.Group>
-                  <Button type='submit'>Crear</Button>
-                </Form>
-            )}
-          </Mutation>
+        <Grid columns={2} centered verticalAlign='middle' style={styles.gridContent}>
+            <Grid.Column width={10}>
+              <div id='map' />
+            </Grid.Column>
+            <Grid.Column width={6}>
+              <Mutation mutation={CREATE_LUGAR} variables={App.args} update={updateCache}>
+                {createLugar => (
+                    <Form id="form"
+                      onSubmit={async e => {
+                        e.preventDefault();
+                        await createLugar({variables:App.args});
+                        eventFire(document.getElementsByClassName('close icon')[0], 'click');
+                        this.args={}
+                      }}
+                      >
+                      <Form.Group widths='equal'>
+                        <Form.Input  name="nombre" onChange={this.handleChange} fluid label='Nombre' placeholder='Nombre' />
+                      </Form.Group>
+                      <Form.Group widths='equal'>
+                        <Form.Select onChange={this.handleChange} fluid label='Nivel/precio' name='nivelPrecio' options={this.optionsPrecio} placeholder='Nivel/precio' />
+                      </Form.Group>
+                      <Button type='submit'>Crear</Button>
+                    </Form>
+                )}
+              </Mutation>
+            </Grid.Column>
+        </Grid>
+
+
       </div>
 
     );

@@ -30,8 +30,8 @@ const styles={
 
 const ModalViewLugar = ({latlng}) => {
   return(
-    <Modal style={styles.modalMap} trigger={<Button circular color='blue' icon='write' />}>
-      <Modal.Header>Editar gusto</Modal.Header>
+    <Modal style={styles.modalMap} trigger={<Button circular color='blue' icon='eye' />} closeIcon>
+      <Modal.Header>Ubicación</Modal.Header>
       <Modal.Content scrolling>
         <Modal.Description>
           <ViewLugar latlng={latlng} />

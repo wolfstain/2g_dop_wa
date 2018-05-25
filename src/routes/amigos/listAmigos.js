@@ -70,7 +70,6 @@ class ListAmigos extends Component{
             <List.Content floated='right'>
               <Button circular color='green' icon='eye' />
               <Button circular color='violet' icon='user delete' />
-              <Button circular color='blue' icon='chat' />
             </List.Content>
             <Image avatar src={infoUsers[match.id_user].picture} />
             <List.Content>
